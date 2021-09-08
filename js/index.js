@@ -14,6 +14,41 @@ $(document).ready(() => {
   const mailRegex =
     /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 
+  $email.keyup(() => {
+    emailIsValid = checkEmail();
+  });
+
+  $password.keyup(() => {
+    passwordIsValid = checkPassword();
+  });
+
+  $passwordConfirm.keyup(() => {
+    confirmPassIsValid = checkConfirmedPass();
+  });
+
+  // Show/hide password
+  $togglePassword.on("click", () => {
+    $password.attr(
+      "type",
+      $password.attr("type") === "password" ? "text" : "password"
+    );
+    $togglePassword.toggleClass("bi-eye");
+  });
+
+  //Show/hide confirm password
+  $toggleConfPassword.on("click", () => {
+    $passwordConfirm.attr(
+      "type",
+      $passwordConfirm.attr("type") === "password" ? "text" : "password"
+    );
+    $toggleConfPassword.toggleClass("bi-eye");
+  });
+
+  //Submit form
+  $regBtn.on("click", () => {
+    submitForm();
+  });
+
   const checkEmail = () => {
     if (!mailRegex.test($email.val().toLowerCase())) {
       $email.removeClass("green").addClass("red");
@@ -54,41 +89,6 @@ $(document).ready(() => {
       alert("There is an error!\nPlease check your input values!");
     }
   };
-
-  $email.keyup(() => {
-    emailIsValid = checkEmail();
-  });
-
-  $password.keyup(() => {
-    passwordIsValid = checkPassword();
-  });
-
-  $passwordConfirm.keyup(() => {
-    confirmPassIsValid = checkConfirmedPass();
-  });
-
-  // Show/hide password
-  $togglePassword.on("click", () => {
-    $password.attr(
-      "type",
-      $password.attr("type") === "password" ? "text" : "password"
-    );
-    $togglePassword.toggleClass("bi-eye");
-  });
-
-  //Show/hide confirm password
-  $toggleConfPassword.on("click", () => {
-    $passwordConfirm.attr(
-      "type",
-      $passwordConfirm.attr("type") === "password" ? "text" : "password"
-    );
-    $toggleConfPassword.toggleClass("bi-eye");
-  });
-
-  //Submit form
-  $regBtn.on("click", () => {
-    submitForm();
-  });
 });
 
 //
